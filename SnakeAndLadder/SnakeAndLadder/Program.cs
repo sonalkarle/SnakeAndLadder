@@ -4,38 +4,45 @@ namespace SnakeAndLadder
 {
     class Program
     {
-        
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to snake and ladder program");
-            int NO_OF_PLAYER = 1;
-            int POSITION = 0;
-            Console.WriteLine("Number of player: " + NO_OF_PLAYER + " is playing in game at position: " + POSITION);
+            //Defiend position
+            int Position_player = 0;
+            int Final_position = 100;
+            int numOfDieRoll = 0;
+            Random random = new Random();        //Computation
 
-
-            Random random = new Random();
-            while (POSITION != 100)
+            while (Position_player < Final_position)   //Condition
             {
-                int dicenumber = random.Next(0, 7);
-                Console.WriteLine("Roll the dice and get answer " + dicenumber);
-                int Choice = random.Next(0, 3);
-                if (Choice == 0)
+                int Dicenumber = random.Next(1, 6);    //random calculation
+                int option = random.Next(0, 2);       //random calculation
+                //Option selection statement
+                switch (option)
                 {
-                    Console.WriteLine("No Play");
-                }
-                else if (Choice == 1)
-                {
-                    POSITION += dicenumber;
-                    Console.WriteLine("Ladder" + POSITION);
+                    case 0:
+                        Console.WriteLine("NO PLAY");
+                        break;
 
-                }
-                else
-                {
-                    POSITION -= dicenumber;
-                    Console.WriteLine("Snake" + POSITION);
-                }
+                    case 1:
+                        Position_player += Dicenumber;
+                        Console.WriteLine("Ladder" + Position_player);
+                        if (Position_player > 100)
+                        {
+                            Position_player -= Dicenumber;
+                        }
+                        break;
 
-                
+                    default:
+                        Position_player -= Dicenumber;
+                        Console.WriteLine("Snake" + Position_player);
+                        if (Position_player < 0)
+                        {
+                            Position_player = 0;
+                        }
+                        break;
+                }
+                numOfDieRoll++;
+                Console.Write("Number of times dice rolled: " + numOfDieRoll);
             }
 
         }
